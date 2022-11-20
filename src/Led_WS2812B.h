@@ -11,7 +11,7 @@
 #include "freertos/queue.h"
 
 #include "Parameters.h"
-#include <C:\Users\somma\Documents\PlatformIO\Projects\Stepper_EspNow_Main\Stepper_EspNow_Main\lib\FastLED_ID126\FastLED.h>
+#include <FastLED.h>
 
 
     #define LED_DEBUG_ON  (0)    
