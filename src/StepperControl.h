@@ -13,9 +13,9 @@
     #define DIOLAZZARO    (0)
 
     //Maximum parameter
-    #define MOTOR_VEL_MAX_RPM (800.0)
-    #define MOTOR_ACC_MAX_RPM (600.0)
-    #define MOTOR_DEC_MAX_RPM (600.0)
+    #define MOTOR_VEL_MAX_RPM (300.0)
+    #define MOTOR_ACC_MAX_RPM (300.0)
+    #define MOTOR_DEC_MAX_RPM (300.0)
 
     //Motor step per revolution
     #define MOTOR_STEPS_PER_REV (200.0)

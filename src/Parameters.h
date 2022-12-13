@@ -15,7 +15,7 @@
     #include "esp_system.h"
     #include "Arduino.h"
 
-    #define ACTUATOR_NUMBER 4
+    #define ACTUATOR_NUMBER 6
 
     typedef enum {
     EMERGENCY = 2,       

@@ -13,7 +13,7 @@ void IRAM_ATTR TransmittData() {
 }
 
 //Master_board Mac
-uint8_t Master_board[] = {0x4C, 0x11, 0xAE, 0x74, 0xB3, 0xDC}; // chip 3 Master_board  
+uint8_t Master_board[] = {0x4C, 0x11, 0xAE, 0x74, 0xCA, 0x88}; // Master Board
 
 // Create a struct_message called myData
 struct_message DataIn;
