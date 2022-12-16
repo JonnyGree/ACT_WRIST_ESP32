@@ -9,7 +9,7 @@
 
     hw_timer_t * timer2 = NULL;
     portMUX_TYPE timerMux2 = portMUX_INITIALIZER_UNLOCKED;
-    volatile SemaphoreHandle_t timerSemaphore;
+    //volatile SemaphoreHandle_t timerSemaphore;
 
     float VelMaxRpm = 800.0, AccMaxRpm = 600.0, DecMaxRpm = 600.0;
     float VelMaxRads, AccMaxRads, DecMaxRads ;
@@ -48,7 +48,7 @@ void IRAM_ATTR onTimer2() {
   // Give a semaphore that we can check in the loop  
   portEXIT_CRITICAL_ISR(&timerMux2);  
   if (Nint >= N ) MotorOFF(); 
-  xSemaphoreGiveFromISR(timerSemaphore, NULL); 
+  //xSemaphoreGiveFromISR(timerSemaphore, NULL); 
 }
 
 
@@ -91,7 +91,7 @@ void motor_init()
 
   motor.Position=cN*360.0/K;
 
-  timerSemaphore = xSemaphoreCreateBinary();
+  //timerSemaphore = xSemaphoreCreateBinary();
   
   //xTaskCreatePinnedToCore(&motor_main, "motor_main_task", 4096, NULL, 5, NULL,1);
 
