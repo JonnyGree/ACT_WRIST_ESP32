@@ -1,4 +1,4 @@
-#include "C:\Users\somma\Documents\GIT\ACT_WRIST_ESP32\src\TouchControl.h"
+#include "TouchControl.h"
 
 int tp_speed;
 

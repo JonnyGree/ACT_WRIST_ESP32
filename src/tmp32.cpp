@@ -1,112 +1,63 @@
 #include "tmp32.h"
 
-float TempAverage=0.0;
-float MemTempC = 0.0;
-byte TempHasChanged = 0;
-byte FanSpeed = 3;
+float  LastTemperature = 0.0;             // Degree"
+char buffer [80];
 
-float ReadTemperature(){ 
-  float voltage = analogRead(TMP39_PIN) / 1024.0;
-  float temperatureC = (voltage - 0.46) * 100 ;  //converting from 10 mv per degree wit 500 mV offset 
-  return temperatureC;
+// Function for reading TMP32 DATA using ADC, and scaling the result
+void ReadTemperature(){ 
+  uint32_t value = analogRead(TMP39_PIN);
+  uint32_t voltage = analogReadMilliVolts(TMP39_PIN); 
+  data.temperature = (float(voltage) - 500.0)/10.0 ;  //converting from 10 mv per degree wit 500 mV offset 
+
+    #if TMP32_DEBUG   
+      sprintf(buffer,"TMP32 Reading raw value: %d MilliVolts %d Scaled value %f ", value, voltage, data.temperature);
+      Serial.println(buffer);                             
+    #endif 
 }
 
-void SetFan(byte _FanSpeed){
-  #if TEMP_DEBUG_ON 
-    Serial.print("Setting Speed to "); Serial.println(_FanSpeed);
-  #endif
-  switch (_FanSpeed) {            
-            case 3: {
-                ledcWrite(PWM_CHANNEL, 250);
-                break;
-              }
-            case 2: {
-                ledcWrite(PWM_CHANNEL, 200);
-                break;
-              }
-            case 1: {
-                ledcWrite(PWM_CHANNEL, 160);
-                break;
-              }
-            case 0: {
-                ledcWrite(PWM_CHANNEL, 0);
-                break;
-              }
-           default:
-              {}
-              break;
-  }
-}
+// Set Fan speed /  range 0 - 100
+void SetFan(uint32_t _FanSpeed){
+  ledcWrite(FAN_PWM_CHANNEL, 255*_FanSpeed/100);
+  data.fanSpeed = _FanSpeed;
 
-void CheckTemperature(){
-
-   float SumTemperature =0.0;      
-   for (int i= 0; i <4; i++) {
-       SumTemperature += ReadTemperature(); 
-       vTaskDelay(10 / portTICK_PERIOD_MS); 
-    } 
-    TempAverage = SumTemperature/4.0;
-      #if TEMP_DEBUG_ON                                 
-      Serial.print(TempAverage); Serial.println(" degrees C");
-      #endif  
- 
-    if (abs(TempAverage - MemTempC) >2.0){
-       TempHasChanged++;
-
-    }
-
- 
- if (TempHasChanged>4){
-
-      if (TempAverage > 40.0) act_state = EMERGENCY ;
- else if (TempAverage > 30.0) act_state = WARNING   ;
- else act_state = STATUS_OK;
-
- 
-    TempHasChanged=0;
-    MemTempC =TempAverage;
- 
-    if (TempAverage > 30.0 ){
-          FanSpeed = 3; SetFan(3);   
-        }
-    else if (TempAverage > 28.0 ){
-          FanSpeed = 2; SetFan(2);
-        }
-    else if (TempAverage > 24.0){
-          FanSpeed = 1; SetFan(1);
-        }
-    else if (TempAverage > 0.0 ){
-          FanSpeed = 0; SetFan(0);
-        }
- }
+  #if TMP32_DEBUG   
+    sprintf(buffer,"Fan Speed raw: %d scaled %d ", ledcRead(FAN_PWM_CHANNEL), data.fanSpeed);  
+    Serial.println(buffer);                           
+  #endif 
 
 }
 
-static void tmp32_read( void * pvParameters ){    
-  #if TEMP_DEBUG_ON
-      Serial.print("Task1 running on core ");
-      Serial.println(xPortGetCoreID());
-  #endif
 
+void tmp32_read( void * parameters ){    
   while(1){
-      CheckTemperature();
-      vTaskDelay(500 / portTICK_PERIOD_MS);
-  }
+    vTaskDelay(5000 / portTICK_PERIOD_MS);
+    ReadTemperature();
+    if (abs(data.temperature - LastTemperature) > TEMPERATURE_DEADBAND) { 
+      LastTemperature =  data.temperature;
+      //Low duty cycle can result in no start
+      //Set full duty cycle for 1S for ensure starting of the fan
+      SetFan(100);                          
+      vTaskDelay(1000 / portTICK_PERIOD_MS); 
+
+      if (LastTemperature > 32.0)       { SetFan(100); }
+      else if (LastTemperature > 29.0)  { SetFan(80); }
+      else if (LastTemperature > 26.0)  { SetFan(60); }
+      else                              { SetFan(0); }
+      }   
+  }  
 }
 
 
 void tmp32_init(){
-  //init fan
-  pinMode(FAN_PIN, OUTPUT);
-  ledcSetup(PWM_CHANNEL, FAN_FREQ, PWM_RESOLUTION);
-  ledcAttachPin(FAN_PIN, PWM_CHANNEL);
-  
+  //Start fan on init 
+  SetFan(100);
+  //Create task for read temperature and set fan accordingly
   xTaskCreatePinnedToCore(
-                    &tmp32_read,           /* Task function. */
-                    "temp32_read_task",    /* name of task. */
+                    tmp32_read,           /* Task function. */
+                    "TEM32_READ_TASK",    /* name of task. */
                     2048,                  /* Stack size of task */
                     NULL,                  /* parameter of the task */
-                    5,                     /* priority of the task */
+                    1,                     /* priority of the task */
                     NULL,                  /* Task handle to keep track of created task */
                     0);                    /* pin task to core 0 */      
 }

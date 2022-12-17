@@ -13,7 +13,7 @@
 
 #include "driver/touch_pad.h"
 #include "soc/rtc_periph.h"
-#include "C:\Users\somma\.platformio\packages\framework-arduinoespressif32\tools\sdk\esp32c3\include\soc\include\soc\sens_periph.h"
+#include "soc\sens_periph.h"
 
 #include "Parameters.h"
 #include "StepperControl.h"

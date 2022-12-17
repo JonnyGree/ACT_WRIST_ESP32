@@ -23,7 +23,6 @@ static void Homing_sequence(void *pvParameter)
 
 void hall_init(void){
 
-    pinMode(HALL_PIN, INPUT_PULLUP );
     attachInterrupt(HALL_PIN, HallDetect, CHANGE);
 
     xTaskCreatePinnedToCore(&Homing_sequence, "touch_pad_read_task", 2048, NULL, 5, NULL,0);
