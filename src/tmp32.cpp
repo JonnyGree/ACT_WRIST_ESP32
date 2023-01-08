@@ -3,6 +3,7 @@
 uint32_t value = 0;
 uint32_t voltage = 0; 
 float  LastTemperature = 0.0;             // Degree"
+boolean tooggle = false;
 char buffer [80];
 
 // Function for reading TMP32 DATA using ADC, and scaling the result
@@ -31,8 +32,6 @@ void SetFan(uint32_t _FanSpeed){
 
 
 void tmp32_read( void * parameters ){    
-  while(1){
-    vTaskDelay(5000 / portTICK_PERIOD_MS);
     ReadTemperature();
     if (abs(data.temperature - LastTemperature) > TEMPERATURE_DEADBAND) { 
       LastTemperature =  data.temperature;
@@ -46,36 +45,4 @@ void tmp32_read( void * parameters ){
       else if (LastTemperature > 26.0)  { SetFan(60); }
       else                              { SetFan(0); }
       }   
-
-    // #if TMP32_DEBUG   
-    //   // Print out remaining stack memory (words)
-    //   Serial.print("TMP32 High Water Mark (Word): ");
-    //   Serial.println(uxTaskGetStackHighWaterMark(NULL));
-
-    //   // Print out number of free heap memory bytes before malloc
-    //   Serial.print("TMP32 Heap before malloc (bytes): ");
-    //   Serial.println(xPortGetFreeHeapSize());                           
-    // #endif 
-    // vTaskDelay(1000 / portTICK_PERIOD_MS);
-  }  
 }
-
-
-void tmp32_init(){
-  //Start fan on init 
-  SetFan(100);
-  //Create task for read temperature and set fan accordingly
-  xTaskCreatePinnedToCore(
-                    tmp32_read,           /* Task function. */
-                    "TEM32_READ_TASK",    /* name of task. */
-                    1800,                  /* Stack size of task */
-                    NULL,                  /* parameter of the task */
-                    1,                     /* priority of the task */
-                    NULL,                  /* Task handle to keep track of created task */
-                    0);                    /* pin task to core 0 */      
-}
-
-
-
-
-

@@ -26,29 +26,62 @@
 
 //Globals
 static TimerHandle_t Timer_5S = NULL;
+static TimerHandle_t Timer_10ms = NULL;
+int counter = 0;
 
 // CALLBACKS
 
 //Called when the timer expires
-void Timer_5S_Callback(TimerHandle_t xTimer){
-  Serial.println("Timer Expired");
+void Routine_5S_CB(TimerHandle_t xTimer){
+  Serial.print("Timer 5S Expired, ID: ");
+  Serial.println((uint32_t)pvTimerGetTimerID(xTimer));
 }  
+
+void Routine_10ms_CB(TimerHandle_t xTimer){
+  Serial.print("Timer 10ms Expired, ID: ");
+  Serial.println((uint32_t)pvTimerGetTimerID(xTimer));
+  counter++;
+  if (counter == 5) {
+      Serial.println("Delay ON");
+      vTaskDelay(1000 / portTICK_PERIOD_MS); 
+    } 
+} 
 
 
 //----------------------------SETUP------------------------//
 
 void setup() {
 
-  Timer_5S =  xTimerCreate( "Timer_5S",                           // Text name for the task.  Helps debugging only.  Not used by FreeRTOS.
-                                  5000 / portTICK_PERIOD_MS,      // The period of the timer in ticks.
-                                  pdTRUE,                         // This is an auto-reload timer.
-                                  ( void * ) 0,                   // A variable incremented by the software timer's callback function
-                                  Timer_5S_Callback);               // The function to execute when the timer expires.
-  //setCpuFrequencyMhz(80); //Set CPU clock to 80MHz fo example
-  initHardware();
-
   // Initialize Serial Monitor
   Serial.begin(115200);
+
+  Timer_5S =  xTimerCreate( "Timer_5S",                     // Text name for the task.  Helps debugging only.  Not used by FreeRTOS.
+                            5000 / portTICK_PERIOD_MS,      // The period of the timer in ticks.
+                            pdTRUE,                         // This is an auto-reload timer.
+                            ( void * ) 0,                   // A variable incremented by the software timer's callback function
+                            Routine_5S_CB);             // The function to execute when the timer expires.
+  
+  Timer_10ms =  xTimerCreate( "Timer_10ms",                 // Text name for the task.  Helps debugging only.  Not used by FreeRTOS.
+                            1000 / portTICK_PERIOD_MS,         // The period of the timer in ticks.
+                            pdTRUE,                         // This is an auto-reload timer.
+                            ( void * ) 1,                   // A variable incremented by the software timer's callback function
+                            Routine_10ms_CB);             // The function to execute when the timer expires.
+  
+  // Check to make sure timers were created 
+  if(Timer_5S == NULL || Timer_10ms == NULL){
+    Serial.println("culd not create one of the timers");
+  } 
+  else{
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    Serial.println("Starting timers...");
+
+    // Start timer (max block time if command queue is full)
+    xTimerStart(Timer_5S, portMAX_DELAY);
+    xTimerStart(Timer_10ms, portMAX_DELAY);
+  }
+
+  //setCpuFrequencyMhz(80); //Set CPU clock to 80MHz fo example
+  initHardware();
 
   // //setup WIFI
   // WIFI_init();
@@ -63,7 +96,7 @@ void setup() {
   // //setup led
    led_init();
   //setup tmp32 & fan
-  tmp32_init();
+  //tmp32_init();
   // //setup hall sensor and homing sequence
   // hall_init();
   // //setup touchpad
