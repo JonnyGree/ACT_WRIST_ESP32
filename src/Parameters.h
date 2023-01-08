@@ -24,6 +24,16 @@
 
     //------------------ PARAMETERS -------------------------//
     #define ACTUATOR_NUMBER 6
+    
+    //Motor max acc/dec/vel
+    #define MOTOR_VEL_MAX_RPM     (100.0)   //rpm
+    #define MOTOR_ACC_MAX_RPM     (100.0)   //rpm^2
+    #define MOTOR_DEC_MAX_RPM     (300.0)   //rpm^2
+
+    //Motor step per revolution
+    #define MOTOR_REDUCTOR_RATIO  (38.4)
+    #define MOTOR_STEPS_PER_REV   (48.0)
+    #define MOTOR_INTERR_F        (50000.0) //50000
 
     //Deadband for regulate fan according to temperature.
     #define TEMPERATURE_DEADBAND 2.0    // C°
@@ -31,9 +41,8 @@
     //Led parameter
     #define NUM_LEDS            1
     #define LED_FLASH_DELAYVAL  300   // Time (in milliseconds) for led blinking
-    #define LED_TASK_DELAYVAL   50    // Time (in milliseconds) to pause led scan cycle
-                
-    #define MAX_BRIGHTNESS 250   
+    #define LED_TASK_DELAYVAL   50    // Time (in milliseconds) to pause led scan cycle             
+    #define MAX_BRIGHTNESS      250   
 
     //------------------ PROCESS DATA -------------------------//
     //State of Actuator (How is it doing doing ?)

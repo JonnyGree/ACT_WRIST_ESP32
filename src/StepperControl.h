@@ -10,18 +10,8 @@
     #include "EEPROM.h"
     
     #define MOTOR_DEBUG_ON (1)
-    #define DIOLAZZARO    (0)
 
-    //Maximum parameter
-    #define MOTOR_VEL_MAX_RPM (300.0)
-    #define MOTOR_ACC_MAX_RPM (300.0)
-    #define MOTOR_DEC_MAX_RPM (300.0)
-
-    //Motor step per revolution
-    #define MOTOR_STEPS_PER_REV (200.0)
-    #define MOTOR_INTERR_F      (20000.0) //50000
-
-  //step per revolution, step pin, dir pin, microstepping
+    //step per revolution, step pin, dir pin, microstepping
     //0 full step, 1 half, 2 1/4,3 1/8, 4 1/16, 5 1/32 
     void motor_init();
     void SetParameter(float Vmax, float Amax, float Dmax);    //% of Max

@@ -1,12 +1,14 @@
 #include "tmp32.h"
 
+uint32_t value = 0;
+uint32_t voltage = 0; 
 float  LastTemperature = 0.0;             // Degree"
 char buffer [80];
 
 // Function for reading TMP32 DATA using ADC, and scaling the result
 void ReadTemperature(){ 
-  uint32_t value = analogRead(TMP39_PIN);
-  uint32_t voltage = analogReadMilliVolts(TMP39_PIN); 
+  value = analogRead(TMP39_PIN);
+  voltage = analogReadMilliVolts(TMP39_PIN); 
   data.temperature = (float(voltage) - 500.0)/10.0 ;  //converting from 10 mv per degree wit 500 mV offset 
 
     #if TMP32_DEBUG   
@@ -20,10 +22,10 @@ void SetFan(uint32_t _FanSpeed){
   ledcWrite(FAN_PWM_CHANNEL, 255*_FanSpeed/100);
   data.fanSpeed = _FanSpeed;
 
-  #if TMP32_DEBUG   
-    sprintf(buffer,"Fan Speed raw: %d scaled %d ", ledcRead(FAN_PWM_CHANNEL), data.fanSpeed);  
-    Serial.println(buffer);                           
-  #endif 
+    #if TMP32_DEBUG   
+      sprintf(buffer,"Fan Speed raw: %d scaled %d ", ledcRead(FAN_PWM_CHANNEL), data.fanSpeed);  
+      Serial.println(buffer);                           
+    #endif 
 
 }
 
@@ -44,6 +46,17 @@ void tmp32_read( void * parameters ){
       else if (LastTemperature > 26.0)  { SetFan(60); }
       else                              { SetFan(0); }
       }   
+
+    // #if TMP32_DEBUG   
+    //   // Print out remaining stack memory (words)
+    //   Serial.print("TMP32 High Water Mark (Word): ");
+    //   Serial.println(uxTaskGetStackHighWaterMark(NULL));
+
+    //   // Print out number of free heap memory bytes before malloc
+    //   Serial.print("TMP32 Heap before malloc (bytes): ");
+    //   Serial.println(xPortGetFreeHeapSize());                           
+    // #endif 
+    // vTaskDelay(1000 / portTICK_PERIOD_MS);
   }  
 }
 
@@ -55,7 +68,7 @@ void tmp32_init(){
   xTaskCreatePinnedToCore(
                     tmp32_read,           /* Task function. */
                     "TEM32_READ_TASK",    /* name of task. */
-                    2048,                  /* Stack size of task */
+                    1800,                  /* Stack size of task */
                     NULL,                  /* parameter of the task */
                     1,                     /* priority of the task */
                     NULL,                  /* Task handle to keep track of created task */

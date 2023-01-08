@@ -24,11 +24,26 @@
 //       esp_restart();
 // }
 
+//Globals
+static TimerHandle_t Timer_5S = NULL;
+
+// CALLBACKS
+
+//Called when the timer expires
+void Timer_5S_Callback(TimerHandle_t xTimer){
+  Serial.println("Timer Expired");
+}  
 
 
 //----------------------------SETUP------------------------//
 
 void setup() {
+
+  Timer_5S =  xTimerCreate( "Timer_5S",                           // Text name for the task.  Helps debugging only.  Not used by FreeRTOS.
+                                  5000 / portTICK_PERIOD_MS,      // The period of the timer in ticks.
+                                  pdTRUE,                         // This is an auto-reload timer.
+                                  ( void * ) 0,                   // A variable incremented by the software timer's callback function
+                                  Timer_5S_Callback);               // The function to execute when the timer expires.
   //setCpuFrequencyMhz(80); //Set CPU clock to 80MHz fo example
   initHardware();
 

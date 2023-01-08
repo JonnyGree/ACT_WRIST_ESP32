@@ -6,8 +6,7 @@
     
     #define TMP32_DEBUG (0)
 
-
-       
+    
     // Update Temperature when exceed deadband (Parameter). 
     // Used for regulate the fan. Store data in C°
     extern float  LastTemperature;             // Degree"
