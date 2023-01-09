@@ -36,13 +36,12 @@ void tmp32_read( void * parameters ){
       LastTemperature =  data.temperature;
       //Low duty cycle can result in no start
       //Set full duty cycle for 1S for ensure starting of the fan
-      SetFan(100);                          
+      SetFan(90);                          
       vTaskDelay(1000 / portTICK_PERIOD_MS); 
-
-      if (LastTemperature > 32.0)       { SetFan(100); }
-      else if (LastTemperature > 29.0)  { SetFan(80); }
-      else if (LastTemperature > 26.0)  { SetFan(60); }
-      else                              { SetFan(0); }
+      if (LastTemperature > 32.0)       { SetFan(90); data.state = ALARM;}
+      else if (LastTemperature > 29.0)  { SetFan(80); data.state = WARNING;}
+      else if (LastTemperature > 26.0)  { SetFan(60); data.state = WARNING;}
+      else                              { SetFan(0);  data.state = STATUS_OK;}
       }   
   }  
 }
@@ -50,7 +49,7 @@ void tmp32_read( void * parameters ){
 
 void tmp32_init(){
   //Start fan on init 
-  SetFan(100);
+  SetFan(90);
   //Create task for read temperature and set fan accordingly
   xTaskCreatePinnedToCore(
                     tmp32_read,           /* Task function. */

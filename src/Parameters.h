@@ -13,6 +13,7 @@
     #include "freertos/task.h"
     #include "freertos/queue.h"
     #include "esp_system.h"
+    #include "EEPROM.h"
 
     // undefine stdlib's abs if encountered
     //avoid problem using float
@@ -25,6 +26,16 @@
     //------------------ PARAMETERS -------------------------//
     #define ACTUATOR_NUMBER 6
 
+    //Motor step per revolution
+    #define MOTOR_STEPS_PER_REV (48.0)
+    #define MOTOR_REDUCTOR_RATIO (38.4)
+
+    //Maximum parameter
+    #define MOTOR_VEL_MAX_RPM (600.0)
+    #define MOTOR_ACC_MAX_RPM (60.0)
+    #define MOTOR_DEC_MAX_RPM (60.0)
+
+
     //Deadband for regulate fan according to temperature.
     #define TEMPERATURE_DEADBAND 2.0    // C°
 
@@ -36,14 +47,14 @@
     #define MAX_BRIGHTNESS 250   
 
     //------------------ PROCESS DATA -------------------------//
-    //State of Actuator (How is it doing doing ?)
+    //State of Actuator (How is it doing ?)
     typedef enum {
     ALARM = 2,       
     WARNING = 1,       
     STATUS_OK = 0,
     } actuator_state;
 
-    //Mode of Actuator (What is it doing doing ?)
+    //Mode of Actuator (What is it doing ?)
     typedef enum {    
     MODE_OPERATION_ENABLED = 4,   //Remote operation, Mov ABS or Mov Rel
     MODE_JOG = 3,      

@@ -4,16 +4,15 @@
 
 #include "HardwareConfig.h"
 #include "Parameters.h"
-#include "tmp32.h"
 
 // #include <WiFi.h>
 // #include "WIFI_Main.h"
 
-// #include "StepperControl.h"
-// #include "tmp32.h"
+#include "StepperControl.h"
+#include "tmp32.h"
 // #include "Hall_Homing.h"
 // #include "TouchControl.h"
- #include "Led_WS2812B.h"
+#include "Led_WS2812B.h"
 
 
 //Watchdog timer
@@ -38,16 +37,12 @@ void setup() {
   // //setup WIFI
   // WIFI_init();
 
-
-  // //Set Pin
-  // initpin();
-
   // //setup motor 
-  // motor_init();
+  motor_init();
 
-  // //setup led
-   led_init();
-  //setup tmp32 & fan
+  // setup led
+  led_init();
+  // setup tmp32 & fan
   tmp32_init();
   // //setup hall sensor and homing sequence
   // hall_init();
@@ -62,17 +57,28 @@ void setup() {
   // timerAlarmWrite(timer0, wdtTimeout * 1000, false); //set time in us
   // //timerAlarmEnable(timer0);
 
-
+  vTaskDelay(5000 / portTICK_PERIOD_MS); 
 }
 
 void loop() { 
-  // timerWrite(timer0, 0); //reset timer (feed watchdog)   
+  if ((data.mode == MODE_READY) and (data.command == IDLE)){
+    if (data.Position == 90){
+      data.command = MOVE_ABS;
+      data.Position= 0;               
+      data.Execute = true;
+    }
+    else{
+      data.command = MOVE_ABS;
+      data.Position= 90;               
+      data.Execute = true;
+    }
+  }
 
-  //     if(motor.Execute){
+      if(data.Execute){
 
-  //       if(motor.mode == motor_mode::MOVE_ABS ){
-  //           MoveAbs(motor.Position);          
-  //       }
+        if(data.command == MOVE_ABS ){
+            MoveAbs(data.Position);          
+        }
   //       else if(motor.mode == motor_mode::MOVE_REL ){
   //           MoveRel(motor.Position);           
   //       }
@@ -89,12 +95,14 @@ void loop() {
   //       else if (motor.mode == motor_mode::TURN_OFF){
   //         SavePosToEEPR();
   //       }
-  //       motor.Execute = false;
+         data.Execute = false;
   //   }
   //   if (motor.microsteps != microsteps && cN == 0)
   //   {
   //       SetMicroSteps(motor.microsteps);
-  //   }
+     }
+  MotorMonitor();
+  vTaskDelay(2000 / portTICK_PERIOD_MS); 
 
 
 

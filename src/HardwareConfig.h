@@ -5,8 +5,8 @@
 
     //--------- TIMER ----------//
     #define TIMER_WATCHDOG 0    // + LEDC
-    //Timer 2 is FREE
     #define TIMER_WIFI     1
+    //Timer 2 is FREE
     #define TIMER_MOTOR    3
 
     //--------- PWM CHANNEL ----------//
