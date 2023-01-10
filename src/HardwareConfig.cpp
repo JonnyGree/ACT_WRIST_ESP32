@@ -32,6 +32,6 @@ void initHardware(){
     //init fan - attach to PWM channel 
     ledcAttachPin(FAN_PIN, FAN_PWM_CHANNEL);
     ledcSetup(FAN_PWM_CHANNEL, FAN_PWM_FREQ, FAN_PWM_RESOLUTION);
-    ledcWrite(FAN_PWM_CHANNEL, 200);
+    ledcWrite(FAN_PWM_CHANNEL, 0);
  
 }

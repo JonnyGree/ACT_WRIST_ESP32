@@ -4,26 +4,46 @@
 
 #include "HardwareConfig.h"
 #include "Parameters.h"
-
-// #include <WiFi.h>
-// #include "WIFI_Main.h"
-
 #include "StepperControl.h"
-#include "tmp32.h"
-// #include "Hall_Homing.h"
-// #include "TouchControl.h"
-#include "Led_WS2812B.h"
 
 
-//Watchdog timer
-// const int wdtTimeout = 3000;  //time in ms to trigger the watchdog
-// hw_timer_t *timer0 = NULL;
-// void IRAM_ATTR resetModule() {
-//       ets_printf("reboot\n");
-//       esp_restart();
-// }
 
+  static const uint16_t timir_divider   = 80; //0.000 001 S
+  static const uint64_t timir_max_count = 10; //20000 HZ
+  hw_timer_t * timer3 = NULL;
 
+  volatile long  timerCounter = 0;
+  volatile long  OB_1ms = 0;
+  volatile long  OB_10ms = 0;
+  volatile long  OB_100ms = 0;
+  volatile long  OB_1s = 0;
+  volatile long  OB_5s = 0;
+
+//  }
+
+  void IRAM_ATTR onTimer3() {
+  timerCounter++;
+
+    REG_WRITE(GPIO_OUT_W1TC_REG, BIT4);  
+       if (motorStart){   
+        CurSpeed = CurSpeed + Af;
+        CurPos = CurPos + CurSpeed;
+            if (CurPos - Nint >= 1) {
+                  REG_WRITE(GPIO_OUT_W1TS_REG, BIT4);
+                  if (dir)  cN++; 
+                  else  cN--; 
+                  Nint++;
+            }
+        if (Nint > Na && Nint <= N-Nd) Af = 0;  //speed is constant
+        if (Nint > N-Nd) Af = Df;               //begin of deceleration             
+        if (Nint >= N || CurSpeed < 0.0) { 
+            motorStart = false;
+            moveDone = true;
+        }
+    
+      }
+
+}
 
 //----------------------------SETUP------------------------//
 
@@ -34,76 +54,57 @@ void setup() {
   // Initialize Serial Monitor
   Serial.begin(115200);
 
-  // //setup WIFI
-  // WIFI_init();
-
-  // //setup motor 
+  //setup motor 
   motor_init();
 
-  // setup led
-  led_init();
-  // setup tmp32 & fan
-  tmp32_init();
-  // //setup hall sensor and homing sequence
-  // hall_init();
-  // //setup touchpad
-  // tp_init();
+  timer3 = timerBegin(3, timir_divider, true);  // timer 0, MWDT clock period = 12.5 ns * TIMGn_Tx_WDT_CLK_PRESCALE -> 12.5 ns * 8 -> 100 ns = 0,1 us, countUp
+  timerAttachInterrupt(timer3, &onTimer3, true); // edge (not level) triggered
+  timerAlarmWrite(timer3, timir_max_count, true); //200 * 0,1 us = 20 us, autoreload true
+  timerAlarmEnable(timer3);
+
+  data.mode = MODE_READY;
+
+}
+
+float target = 90.0;
+
+void loop() {
+  if(timerCounter > 100){ 
+    timerCounter = 0;
+    
+    OB_1ms++;
+    OB_10ms++;
+    OB_100ms++;
+    OB_1s++;
+    OB_5s++;
+
+    if(OB_1ms>=1){
+      OB_1ms = 0;
+    } 
+
+    if(OB_10ms>=10){
+      OB_10ms = 0;
+      MotorMonitor();
+    }
+
+    if(OB_100ms>=100){
+      OB_100ms = 0;
+    }
+
+    if(OB_1s>=1000){
+      OB_1s = 0;
+    }
+
+    if(OB_5s>=5000){
+      OB_5s = 0;
+      PrintData();
+      if  (!motorStart){
+        MoveRel(target);
+      }
+    }
+
+  } 
+}  
+
 
  
-
-  // //Register watchdog timer
-  // timer0 = timerBegin(TIMER_WATCHDOG, 80, true);     //timer 0, div 80
-  // timerAttachInterrupt(timer0, &resetModule, true);  //attach callback
-  // timerAlarmWrite(timer0, wdtTimeout * 1000, false); //set time in us
-  // //timerAlarmEnable(timer0);
-
-  vTaskDelay(5000 / portTICK_PERIOD_MS); 
-}
-
-void loop() { 
-  if ((data.mode == MODE_READY) and (data.command == IDLE)){
-    if (data.Position == 90){
-      data.command = MOVE_ABS;
-      data.Position= 0;               
-      data.Execute = true;
-    }
-    else{
-      data.command = MOVE_ABS;
-      data.Position= 90;               
-      data.Execute = true;
-    }
-  }
-
-      if(data.Execute){
-
-        if(data.command == MOVE_ABS ){
-            MoveAbs(data.Position);          
-        }
-  //       else if(motor.mode == motor_mode::MOVE_REL ){
-  //           MoveRel(motor.Position);           
-  //       }
-  //       else if (motor.mode == motor_mode::JOG && abs(motor.Jog_vel) >10 ){
-  //           Serial.println("Chiamo Jog ");
-  //           //Jog() ;
-  //       }
-  //       else if (motor.mode == motor_mode::SET_POS){
-  //         SetCurrentPos(motor.Position);
-  //       }
-  //       else if (motor.mode == motor_mode::SET_SPEED){
-  //         SetParameter(motor.vel, motor.acc, motor.dec);
-  //       }
-  //       else if (motor.mode == motor_mode::TURN_OFF){
-  //         SavePosToEEPR();
-  //       }
-         data.Execute = false;
-  //   }
-  //   if (motor.microsteps != microsteps && cN == 0)
-  //   {
-  //       SetMicroSteps(motor.microsteps);
-     }
-  MotorMonitor();
-  vTaskDelay(2000 / portTICK_PERIOD_MS); 
-
-
-
-}

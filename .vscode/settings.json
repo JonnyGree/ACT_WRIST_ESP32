@@ -16,6 +16,10 @@
         "vector": "cpp",
         "fstream": "cpp",
         "limits": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "algorithm": "cpp",
+        "string_view": "cpp",
+        "iomanip": "cpp",
+        "streambuf": "cpp"
     }
 }

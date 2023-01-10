@@ -8,20 +8,12 @@
     #define Parameters_h
 
     #include "Arduino.h"
-    #include <stdio.h>
-    #include "freertos/FreeRTOS.h"
-    #include "freertos/task.h"
-    #include "freertos/queue.h"
+    //#include <stdio.h>
+    // #include "freertos/FreeRTOS.h"
+    // #include "freertos/task.h"
+    // #include "freertos/queue.h"
     #include "esp_system.h"
     #include "EEPROM.h"
-
-    // undefine stdlib's abs if encountered
-    //avoid problem using float
-    #ifdef abs
-    #undef abs
-    #endif
-
-    #define abs(x) ((x)>0?(x):-(x))
 
     //------------------ PARAMETERS -------------------------//
     #define ACTUATOR_NUMBER 6
@@ -45,6 +37,7 @@
     #define LED_TASK_DELAYVAL   50    // Time (in milliseconds) to pause led scan cycle
                 
     #define MAX_BRIGHTNESS 250   
+  
 
     //------------------ PROCESS DATA -------------------------//
     //State of Actuator (How is it doing ?)

@@ -9,7 +9,7 @@
     #include "HardwareConfig.h"
     #include "Parameters.h"
     
-    #define MOTOR_DEBUG_ON (0)
+    #define MOTOR_DEBUG_ON (1)
 
   //step per revolution, step pin, dir pin, microstepping
     //0 full step, 1 half, 2 1/4,3 1/8, 4 1/16, 5 1/32 
@@ -18,7 +18,7 @@
     void MoveAbs(float _s );
     void MoveRel(float _s);
     void Jog();
-    void IRAM_ATTR onTimer3();
+
     void MotorMonitor();
     void SetMicroSteps(int mic);
     void PrintData();  
@@ -26,6 +26,9 @@
     void SetCurrentPos(float pos);
     void SavePosToEEPR();
     
+      //Globals sync variables
+  //volatile will let known the compiler the variable value may change outside the current task, like inside an ISR
+    extern volatile boolean dir, motorStart, moveReady, moveDone, jogReady ;     
  
     extern float  K, F;
     extern int microsteps;

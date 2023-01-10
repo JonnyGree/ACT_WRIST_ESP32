@@ -6,21 +6,17 @@
 */
 #include "StepperControl.h"
 
-  //ISR 
-  static const uint16_t timir_divider   = 80; //0.000 001 S
-  static const uint64_t timir_max_count = 50; //20000 HZ
-  hw_timer_t * timer3 = NULL;
+
 
   //Globals sync variables
   //volatile will let known the compiler the variable value may change outside the current task, like inside an ISR
-  volatile boolean dir, motorStart = false, moveReady = false, moveDone = true, jogReady = false;                        
-  portMUX_TYPE spinlock = portMUX_INITIALIZER_UNLOCKED;
+  volatile boolean dir, motorStart = false, moveReady = false, moveDone = false, jogReady = false;                        
 
 
 
   static float VelMaxRads = MOTOR_VEL_MAX_RPM*TWO_PI/60, AccMaxRads = MOTOR_ACC_MAX_RPM*TWO_PI/60, DecMaxRads = MOTOR_DEC_MAX_RPM*TWO_PI/60 ;
   int microsteps;
-  float  K, F = 1000000 / timir_max_count; //50000
+  float  K, F = 100000; //50000
   float vM, aM, dM, m;
   float JogAccMax, JogAcc, JogSpeed;
   int cyclecounter;
@@ -29,6 +25,8 @@
   float T,Tad, ta,tv,td;
   volatile float  alfa, Af, Vsf, Df; //Af[steps/Ts^2],Vsf[steps/Ts]
   volatile float  CurSpeed, CurPos; //
+
+  // N difference betweek current and target position in step
   volatile long  N, Na, Nv, Nd, Nad, cN, Nint;
 
 
@@ -36,27 +34,27 @@
 
     
 
-// interrupt procedure, every 1/10000 [sec]=1/10[ms] program calls this procedure
-void IRAM_ATTR onTimer3() {
-  //Critical Code here
-  REG_WRITE(GPIO_OUT_W1TC_REG, BIT4);  
-       if (motorStart){   
-        CurSpeed = CurSpeed + Af;
-        CurPos = CurPos + CurSpeed;
-            if (CurPos - Nint >= 1) {
-                  REG_WRITE(GPIO_OUT_W1TS_REG, BIT4);
-                  if (dir)  cN++; 
-                  else  cN--; 
-                  Nint++;
-            }
-        if (Nint > Na && Nint <= N-Nd) Af = 0;  //speed is constant
-        if (Nint > N-Nd) Af = Df;               //begin of deceleration             
-        if (Nint >= N || CurSpeed < 0.0) { 
-            motorStart = false;
-            moveDone = true;
-        }
+// // interrupt procedure, every 1/10000 [sec]=1/10[ms] program calls this procedure
+// void IRAM_ATTR onTimer3() {
+//   //Critical Code here
+//   REG_WRITE(GPIO_OUT_W1TC_REG, BIT4);  
+//        if (motorStart){   
+//         CurSpeed = CurSpeed + Af;
+//         CurPos = CurPos + CurSpeed;
+//             if (CurPos - Nint >= 1) {
+//                   REG_WRITE(GPIO_OUT_W1TS_REG, BIT4);
+//                   if (dir)  cN++; 
+//                   else  cN--; 
+//                   Nint++;
+//             }
+//         if (Nint > Na && Nint <= N-Nd) Af = 0;  //speed is constant
+//         if (Nint > N-Nd) Af = Df;               //begin of deceleration             
+//         if (Nint >= N || CurSpeed < 0.0) { 
+//             motorStart = false;
+//             moveDone = true;
+//         }
     
-      }
+//       }
 
     //   if (!JogStop){ 
     
@@ -80,12 +78,12 @@ void IRAM_ATTR onTimer3() {
 
     // }
      
-}
+// }
 
 
 void motor_init()
 { 
-  Serial.print("MotorSetup");Serial.println(xPortGetCoreID());
+  Serial.print("MotorSetup on core");Serial.println(xPortGetCoreID());
  
   m = AccMaxRads/DecMaxRads;
  
@@ -115,11 +113,6 @@ void motor_init()
   SetParameter(10,10,10);
 
   data.Position=cN*360.0/K;
-
-  timer3 = timerBegin(3, timir_divider, true);  // timer 0, MWDT clock period = 12.5 ns * TIMGn_Tx_WDT_CLK_PRESCALE -> 12.5 ns * 8 -> 100 ns = 0,1 us, countUp
-  timerAttachInterrupt(timer3, &onTimer3, true); // edge (not level) triggered
-  timerAlarmWrite(timer3, timir_max_count, true); //200 * 0,1 us = 20 us, autoreload true
-  timerAlarmEnable(timer3);
 
 }
 
@@ -188,7 +181,8 @@ void MoveAbs(float _s){
 
 void MoveRel(float _s){
   if (data.mode != MODE_READY  || data.state == ALARM) return;
-    PlanTrajectory( _s* + cN*360.0/K);
+    Serial.println("Call move rel");
+    PlanTrajectory( _s + float(cN)*360.0/K);
 }
 
 void Jog(){
@@ -206,34 +200,21 @@ void Jog(){
 
 
 void MotorMonitor(){
-  if  (moveReady  and !motorStart and !moveDone ){
-    moveReady = false;  
-    motorStart = true;
-    data.mode = MODE_OPERATION_ENABLED;
-    digitalWrite(ENABLE_PIN, LOW);
-    if (dir) digitalWrite(DIR_PIN, HIGH);
-    else digitalWrite(DIR_PIN, LOW); 
-  }
-  else if  (moveDone){
-    // timerDetachInterrupt(timer3); // edge (not level) triggered
-    // timerEnd(timer3);
-    // timer3 = NULL;  
+  if  (moveDone){
     digitalWrite(STEP_PIN, LOW); 
     digitalWrite(ENABLE_PIN, HIGH);
     data.mode = MODE_READY;
     data.command = IDLE;
     moveDone = false;
   }
-  else if  (!moveDone and motorStart){
-    PrintData();
-  }
-
 }  
 //trajectory planning procedure
 void PlanTrajectory(float _s){ 
-    
- N = long(_s*K/360.0) - cN ; //difference from desired and current position [steps]
- if (N == 0) {Nint = -1; return;} //
+ Serial.println("Call plan trajectory");   
+ N = long(_s*K/360.0) - cN ;        //difference from desired and current position [steps]
+ Serial.println(_s); 
+ Serial.println(K); 
+ if (N == 0) {Nint = -1; return;}   //
     if (N < 0) dir = false;
     else dir = true;    
 
@@ -274,9 +255,13 @@ void PlanTrajectory(float _s){
     Serial.print("Df = "); Serial.println(Df,5);
   #endif
   //Start Motor
-  moveReady=true;
   moveDone=false;
-  jogReady=false;
+  jogReady=false; 
+  data.mode = MODE_OPERATION_ENABLED;
+  digitalWrite(ENABLE_PIN, LOW);
+  if (dir) digitalWrite(DIR_PIN, HIGH);
+  else digitalWrite(DIR_PIN, LOW); 
+  motorStart = true;
 }
 
 //this procedure displaying current data

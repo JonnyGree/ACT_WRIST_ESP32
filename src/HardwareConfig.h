@@ -52,6 +52,12 @@
    
     //#define I2C_SDA       12
     //#define I2C_SCL       13
+    
+    // JTAG PIN
+    //#define TDO       15
+    //#define TMS       14
+    //#define TCK       13
+    //#define TDI       12
 
 //--------------- FUNCTION -----------------//
     void initHardware();
