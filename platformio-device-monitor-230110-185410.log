@@ -1,0 +1,393 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13132
+load:0x40080400,len:3036
+entry 0x400805e4
+MotorSetup on core1
+Setting microsteps to 32
+Set Vm to: 2.00
+Set Am to: 2.00
+Set Dm to: 2.00
+
+..............................................
+STEPS = 0 [steps]
+ANGLE = 0.00 [deg]
+POS = 0.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 90.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  1 register dump:
+PC      : 0x4008482c  PS      : 0x00050031  A0      : 0x80085482  A1      : 0x3ffbeebc  
+A2      : 0x00000010  A3      : 0x00018010  A4      : 0x000637ff  A5      : 0x3ffbee9c  
+A6      : 0x00000008  A7      : 0x3ffbdbfc  A8      : 0x00000000  A9      : 0x00000000  
+A10     : 0x0000000a  A11     : 0x00000001  A12     : 0x80081465  A13     : 0x3ffbee7c  
+A14     : 0x3ffc17b0  A15     : 0xfffffbff  SAR     : 0x0000001f  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x8008548e  LBEG    : 0x40086519  LEND    : 0x40086529  LCOUNT  : 0xffffffff  
+
+
+Backtrace:0x40084829:0x3ffbeebc |<-CORRUPTED
+
+  #0  0x40084829:0x3ffbeebc in _xt_lowint1 at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/freertos/port/xtensa/xtensa_vectors.S:1111
+
+
+
+
+ELF file SHA256: 0000000000000000
+
+Rebooting...
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13132
+load:0x40080400,len:3036
+entry 0x400805e4
+MotorSetup on core1
+Setting microsteps to 32
+Set Vm to: 2.00
+Set Am to: 2.00
+Set Dm to: 2.00
+
+..............................................
+STEPS = 0 [steps]
+ANGLE = 0.00 [deg]
+POS = 0.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 90.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  1 register dump:
+PC      : 0x4008482c  PS      : 0x00050031  A0      : 0x80085482  A1      : 0x3ffbeebc  
+A2      : 0x00000010  A3      : 0x00018010  A4      : 0x000637ff  A5      : 0x3ffbee9c  
+A6      : 0x00000008  A7      : 0x3ffbdbfc  A8      : 0x00000000  A9      : 0x00000000  
+A10     : 0x0000000a  A11     : 0x00000001  A12     : 0x80081465  A13     : 0x3ffbee7c  
+A14     : 0x3ffc17b0  A15     : 0xfffffbff  SAR     : 0x0000001f  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x8008548e  LBEG    : 0x40086519  LEND    : 0x40086529  LCOUNT  : 0xffffffff  
+
+
+Backtrace:0x40084829:0x3ffbeebc |<-CORRUPTED
+
+  #0  0x40084829:0x3ffbeebc in _xt_lowint1 at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/freertos/port/xtensa/xtensa_vectors.S:1111
+
+
+
+
+ELF file SHA256: 0000000000000000
+
+Rebooting...
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13132
+load:0x40080400,len:3036
+entry 0x400805e4
+MotorSetup on core1
+Setting microsteps to 32
+Set Vm to: 2.00
+Set Am to: 2.00
+Set Dm to: 2.00
+
+..............................................
+STEPS = 0 [steps]
+ANGLE = 0.00 [deg]
+POS = 0.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 90.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  1 register dump:
+PC      : 0x4008482c  PS      : 0x00050031  A0      : 0x80085482  A1      : 0x3ffbeebc  
+A2      : 0x00000010  A3      : 0x00018010  A4      : 0x000637ff  A5      : 0x3ffbee9c  
+A6      : 0x00000008  A7      : 0x3ffbdbfc  A8      : 0x00000000  A9      : 0x00000000  
+A10     : 0x0000000a  A11     : 0x00000001  A12     : 0x80081465  A13     : 0x3ffbee7c  
+A14     : 0x3ffc17b0  A15     : 0xfffffbff  SAR     : 0x0000001f  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x8008548e  LBEG    : 0x40086519  LEND    : 0x40086529  LCOUNT  : 0xffffffff  
+
+
+Backtrace:0x40084829:0x3ffbeebc |<-CORRUPTED
+
+  #0  0x40084829:0x3ffbeebc in _xt_lowint1 at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/freertos/port/xtensa/xtensa_vectors.S:1111
+
+
+
+
+ELF file SHA256: 0000000000000000
+
+Rebooting...
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13132
+load:0x40080400,len:3036
+entry 0x400805e4
+MotorSetup on core1
+Setting microsteps to 32
+Set Vm to: 2.00
+Set Am to: 2.00
+Set Dm to: 2.00
+
+..............................................
+STEPS = 0 [steps]
+ANGLE = 0.00 [deg]
+POS = 0.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 90.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  1 register dump:
+PC      : 0x4008482c  PS      : 0x00050031  A0      : 0x80085482  A1      : 0x3ffbeebc  
+A2      : 0x00000010  A3      : 0x00018010  A4      : 0x000637ff  A5      : 0x3ffbee9c  
+A6      : 0x00000008  A7      : 0x3ffbdbfc  A8      : 0x00000000  A9      : 0x00000000  
+A10     : 0x0000000a  A11     : 0x00000001  A12     : 0x80081465  A13     : 0x3ffbee7c  
+A14     : 0x3ffc17b0  A15     : 0xfffffbff  SAR     : 0x0000001f  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x8008548e  LBEG    : 0x40086519  LEND    : 0x40086529  LCOUNT  : 0xffffffff  
+
+
+Backtrace:0x40084829:0x3ffbeebc |<-CORRUPTED
+
+  #0  0x40084829:0x3ffbeebc in _xt_lowint1 at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/freertos/port/xtensa/xtensa_vectors.S:1111
+
+
+
+
+ELF file SHA256: 0000000000000000
+
+Rebooting...
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13132
+load:0x40080400,len:3036
+entry 0x400805e4
+MotorSetup on core1
+Setting microsteps to 32
+Set Vm to: 2.00
+Set Am to: 2.00
+Set Dm to: 2.00
+
+..............................................
+STEPS = 0 [steps]
+ANGLE = 0.00 [deg]
+POS = 0.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 90.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  1 register dump:
+PC      : 0x4008482c  PS      : 0x00050031  A0      : 0x80085482  A1      : 0x3ffbeebc  
+A2      : 0x00000010  A3      : 0x00018010  A4      : 0x000637ff  A5      : 0x3ffbee9c  
+A6      : 0x00000008  A7      : 0x3ffbdbfc  A8      : 0x00000000  A9      : 0x00000000  
+A10     : 0x0000000a  A11     : 0x3ffc17bc  A12     : 0x80081465  A13     : 0x3ffbee7c  
+A14     : 0x3ffc17b0  A15     : 0xfffffbff  SAR     : 0x0000001f  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x8008548e  LBEG    : 0x40086519  LEND    : 0x40086529  LCOUNT  : 0xffffffff  
+
+
+Backtrace:0x40084829:0x3ffbeebc |<-CORRUPTED
+
+  #0  0x40084829:0x3ffbeebc in _xt_lowint1 at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/freertos/port/xtensa/xtensa_vectors.S:1111
+
+
+
+
+ELF file SHA256: 0000000000000000
+
+Rebooting...
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13132
+load:0x40080400,len:3036
+entry 0x400805e4
+MotorSetup on core1
+Setting microsteps to 32
+Set Vm to: 2.00
+Set Am to: 2.00
+Set Dm to: 2.00
+
+..............................................
+STEPS = 0 [steps]
+ANGLE = 0.00 [deg]
+POS = 0.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 90.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  1 register dump:
+PC      : 0x4008482c  PS      : 0x00050031  A0      : 0x80085482  A1      : 0x3ffbeebc  
+A2      : 0x00000010  A3      : 0x00018010  A4      : 0x000637ff  A5      : 0x3ffbee9c  
+A6      : 0x00000008  A7      : 0x3ffbdbfc  A8      : 0x00000000  A9      : 0x00000000  
+A10     : 0x0000000a  A11     : 0x00000001  A12     : 0x80081465  A13     : 0x3ffbee7c  
+A14     : 0x3ffc17b0  A15     : 0xfffffbff  SAR     : 0x0000001f  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x8008548e  LBEG    : 0x40086519  LEND    : 0x40086529  LCOUNT  : 0xffffffff  
+
+
+Backtrace:0x40084829:0x3ffbeebc |<-CORRUPTED
+
+  #0  0x40084829:0x3ffbeebc in _xt_lowint1 at /Users/ficeto/Desktop/ESP32/ESP32S2/esp-idf-public/components/freertos/port/xtensa/xtensa_vectors.S:1111
+
+
+
+
+ELF file SHA256: 0000000000000000
+
+Rebooting...
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13132
+load:0x40080400,len:3036
+entry 0x400805e4
+MotorSetup on core1
+Setting microsteps to 32
+Set Vm to: 2.00
+Set Am to: 2.00
+Set Dm to: 2.00

@@ -8,11 +8,11 @@
     #define Parameters_h
 
     #include "Arduino.h"
-    #include <stdio.h>
-    #include "freertos/FreeRTOS.h"
-    #include "freertos/task.h"
-    #include "freertos/queue.h"
-    #include "esp_system.h"
+    // #include <stdio.h>
+    // #include "freertos/FreeRTOS.h"
+    // #include "freertos/task.h"
+    // #include "freertos/queue.h"
+    // #include "esp_system.h"
     //#include "EEPROM.h"
 
     //------------------ PARAMETERS -------------------------//

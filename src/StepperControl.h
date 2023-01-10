@@ -39,7 +39,7 @@
 
     // ISR Timer
     static const uint16_t timir_divider   = 80;//F = 1 000 000, tick every 0. 000 001 S
-    static const uint64_t timir_max_count = 10;  
+    static const uint64_t timir_max_count = 50;  
 
     // INPUT:
     // Speed start [rad/s], Max speed [rad/s], Max acceleration [rad/s^2], Max deceleration [rad/s^2], m= a/d

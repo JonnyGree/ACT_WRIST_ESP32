@@ -1,0 +1,918 @@
+
+..............................................
+STEPS = 1536 [steps]
+ANGLE = 360.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 450.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 1920 [steps]
+ANGLE = 450.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 540.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 2304 [steps]
+ANGLE = 540.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 630.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 2688 [steps]
+ANGLE = 630.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 720.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 3072 [steps]
+ANGLE = 720.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 810.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 3456 [steps]
+ANGLE = 810.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 900.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 3840 [steps]
+ANGLE = 900.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 990.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 4224 [steps]
+ANGLE = 990.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1080.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 4608 [steps]
+ANGLE = 1080.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1170.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 4992 [steps]
+ANGLE = 1170.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1260.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 5376 [steps]
+ANGLE = 1260.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1350.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 5760 [steps]
+ANGLE = 1350.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1440.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 6144 [steps]
+ANGLE = 1440.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1530.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 6528 [steps]
+ANGLE = 1530.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1620.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 6912 [steps]
+ANGLE = 1620.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1710.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 7296 [steps]
+ANGLE = 1710.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1800.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 7680 [steps]
+ANGLE = 1800.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1890.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 8064 [steps]
+ANGLE = 1890.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 1980.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 8448 [steps]
+ANGLE = 1980.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2070.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 8832 [steps]
+ANGLE = 2070.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2160.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 9216 [steps]
+ANGLE = 2160.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2250.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 9600 [steps]
+ANGLE = 2250.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2340.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 9984 [steps]
+ANGLE = 2340.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2430.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 10368 [steps]
+ANGLE = 2430.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2520.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 10752 [steps]
+ANGLE = 2520.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2610.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 11136 [steps]
+ANGLE = 2610.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2700.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 11520 [steps]
+ANGLE = 2700.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2790.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 11904 [steps]
+ANGLE = 2790.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2880.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 12288 [steps]
+ANGLE = 2880.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 2970.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 12672 [steps]
+ANGLE = 2970.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 3060.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 13056 [steps]
+ANGLE = 3060.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 3150.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 13440 [steps]
+ANGLE = 3150.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 3240.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 13824 [steps]
+ANGLE = 3240.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 3330.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
+
+..............................................
+STEPS = 14208 [steps]
+ANGLE = 3330.00 [deg]
+POS = 384.00 [step]
+SPEED = 0.00 [step/s]
+Max. speed vM = 2.00[rad/sec]
+Max. accler. aM = 2.00[rad/sec^2]
+Ratio of a/d m = 1.00
+K = 1536.00
+..............................................
+Call move rel
+N = 384
+Na = 192
+Nv = 0
+Nd = 192
+_s = 3420.00
+s_ = 90.00
+sad= 0.00
+T = 1.77
+Ta = 0.89
+Tv = 0.00
+Td = 0.89
+vv = 1.77
+Vsf = 0.000000
+Af = 0.00000
+Df = -0.00000
