@@ -6,12 +6,8 @@
 #include "Parameters.h"
 #include "StepperControl.h"
 
-
-
-  static const uint16_t timir_divider   = 80; //0.000 001 S
-  static const uint64_t timir_max_count = 10; //20000 HZ
-  hw_timer_t * timer3 = NULL;
-
+  hw_timer_t * timer3 = NULL;  
+  
   volatile long  timerCounter = 0;
   volatile long  OB_1ms = 0;
   volatile long  OB_10ms = 0;
@@ -25,9 +21,9 @@
   timerCounter++;
 
     REG_WRITE(GPIO_OUT_W1TC_REG, BIT4);  
-       if (motorStart){   
-        CurSpeed = CurSpeed + Af;
-        CurPos = CurPos + CurSpeed;
+       if (motorStart){                                 // Ts = 1 / F
+        CurSpeed = CurSpeed + Af;                       //[steps /Ts] [steps /Ts^2]
+        CurPos = CurPos + CurSpeed;                     //[steps   ] [steps /Ts]
             if (CurPos - Nint >= 1) {
                   REG_WRITE(GPIO_OUT_W1TS_REG, BIT4);
                   if (dir)  cN++; 

@@ -6,28 +6,47 @@
 */
 #include "StepperControl.h"
 
-
-
+  // ------------------------------------------------ VARIABLES ------------------------------------------//    
   //Globals sync variables
   //volatile will let known the compiler the variable value may change outside the current task, like inside an ISR
-  volatile boolean dir, motorStart = false, moveReady = false, moveDone = false, jogReady = false;                        
+    volatile boolean dir, motorStart, moveReady, moveDone, jogReady ;  
 
+    // INPUT:
+    // Speed start [rad/s], Max speed [rad/s], Max acceleration [rad/s^2], Max deceleration [rad/s^2], m= a/d
+    float vs = 0.0, vM = 2.0, aM = 2.0, dM = 2.0;
+    // m = aM / dM
+    float m = aM/dM;
+    // Conversion:
+    // [steps /T^2] = [rad/T^2] *K * TWO_PI / F^2
+    // [steps /T  ] = [rad/T  ] *K * TWO_PI / F
+ 
+    // K Number of steps per revolution [steps/rev]
+    float  K = 32.0*MOTOR_STEPS_PER_REV;
+    // Integral Frequency
+    float  F = 1000000/float(timir_max_count);
+    // Driver microsteps. Total number of steps per rev are equal to K = microsteps * mechanical motor steps
+    int microsteps = 32;
 
+    
+    // Time: Total time of motion, acceleration + deceleration,
+    // Acceleration, constant speed, deceleration
+    // [s]
+    volatile float T, Tad, ta, tv, td;
+    // N difference from desired and current position [steps] 
+    // Na... Number of steps in each phase [step]
+    volatile long  N, Na, Nv, Nd, Nad;
+    float sad;   
+    //Initialized at maximum
+    volatile float alfa = TWO_PI/K, Af = aM/alfa/F/F, Vsf = vs/alfa/F, Df = -Af/m; //alfa[rad/step] Af[steps/Ts^2] Vsf[steps/Ts]
 
-  static float VelMaxRads = MOTOR_VEL_MAX_RPM*TWO_PI/60, AccMaxRads = MOTOR_ACC_MAX_RPM*TWO_PI/60, DecMaxRads = MOTOR_DEC_MAX_RPM*TWO_PI/60 ;
-  int microsteps;
-  float  K, F = 100000; //50000
-  float vM, aM, dM, m;
-  float JogAccMax, JogAcc, JogSpeed;
-  int cyclecounter;
-  float vs = 0.0,vv ;
-  float sad;
-  float T,Tad, ta,tv,td;
-  volatile float  alfa, Af, Vsf, Df; //Af[steps/Ts^2],Vsf[steps/Ts]
-  volatile float  CurSpeed, CurPos; //
+    // Current number of steps
+    volatile long cN;
 
-  // N difference betweek current and target position in step
-  volatile long  N, Na, Nv, Nd, Nad, cN, Nint;
+    // Integral manipulated value
+    volatile long Nint;
+    volatile float CurSpeed, CurPos; 
+    // Max velocity in the trajectory
+    volatile float vv;
 
 
 
@@ -85,28 +104,26 @@ void motor_init()
 { 
   Serial.print("MotorSetup on core");Serial.println(xPortGetCoreID());
  
-  m = AccMaxRads/DecMaxRads;
- 
-    if (!EEPROM.begin(1000)) {
-    Serial.println("Failed to initialise EEPROM");
-    Serial.println("Restarting...");
-    delay(1000);
-    ESP.restart();
-  }
+  //   if (!EEPROM.begin(1000)) {
+  //   Serial.println("Failed to initialise EEPROM");
+  //   Serial.println("Restarting...");
+  //   delay(1000);
+  //   ESP.restart();
+  // }
   
-  cN = EEPROM.readLong(0);
-  microsteps = EEPROM.readFloat(sizeof(long));
-   #if MOTOR_DEBUG_ON
-        Serial.print("Cn read from EEPROM:"); Serial.println(cN);
-        Serial.print("microsteps read from EEPROM:"); Serial.println(microsteps);
-   #endif
-  if (!(microsteps == 1 || microsteps == 2 || microsteps == 4 || microsteps == 8 || microsteps == 16 || microsteps == 32 )) {
-    microsteps = 1;
-    cN = 0;
-    SavePosToEEPR();
-    Serial.println("Setting microsteps to 1 ,need to set zero ");
-    Serial.print("K Is equal to :"); Serial.println(MOTOR_STEPS_PER_REV*(float)microsteps);
-  }
+  // cN = EEPROM.readLong(0);
+  // microsteps = EEPROM.readFloat(sizeof(long));
+  //  #if MOTOR_DEBUG_ON
+  //       Serial.print("Cn read from EEPROM:"); Serial.println(cN);
+  //       Serial.print("microsteps read from EEPROM:"); Serial.println(microsteps);
+  //  #endif
+  // if (!(microsteps == 1 || microsteps == 2 || microsteps == 4 || microsteps == 8 || microsteps == 16 || microsteps == 32 )) {
+  //   microsteps = 1;
+  //   cN = 0;
+  //   SavePosToEEPR();
+  //   Serial.println("Setting microsteps to 1 ,need to set zero ");
+  //   Serial.print("K Is equal to :"); Serial.println(MOTOR_STEPS_PER_REV*(float)microsteps);
+  // }
 
   SetMicroSteps(microsteps);
   
@@ -124,9 +141,9 @@ void SetCurrentPos(float pos){
 }
 
 void SavePosToEEPR(){
-  EEPROM.writeLong(0,cN);
-  EEPROM.writeFloat(sizeof(long),microsteps);
-  EEPROM.commit();
+  // EEPROM.writeLong(0,cN);
+  // EEPROM.writeFloat(sizeof(long),microsteps);
+  // EEPROM.commit();
      #if MOTOR_DEBUG_ON
         Serial.print("Cn write to EERPROM:"); Serial.println(cN);
         Serial.print("microsteps write to EEPROM:"); Serial.println(microsteps);
@@ -156,15 +173,20 @@ void SetMicroSteps(int mic){
 }
 
 void SetParameter(float _v, float _a, float _d){
-      data.vel = _v;;
-      data.acc = _a;
-      data.dec = _d;
-      vM = VelMaxRads*_v/100.0;
-      aM = AccMaxRads*_a/100.0;
-      dM = DecMaxRads*_d/100.0;
+      // data.vel = _v;;
+      // data.acc = _a;
+      // data.dec = _d;
+      // vM = VelMaxRads*_v/100.0;
+      // aM = AccMaxRads*_a/100.0;
+      // dM = DecMaxRads*_d/100.0;
+      // m = aM/dM;   
+
+      data.vel = vM;;
+      data.acc = aM;
+      data.dec = dM;
       m = aM/dM;   
 
-      JogAccMax = AccMaxRads*0.1/alfa/F/F;
+      //JogAccMax = AccMaxRads*0.1/alfa/F/F;
 
       #if MOTOR_DEBUG_ON
         Serial.print("Set Vm to: "); Serial.println(vM);
@@ -193,8 +215,8 @@ void Jog(){
   moveReady=true;
   jogReady=false;
   CurPos = 0.0; CurSpeed= 0.0; Nint=0;
-  cyclecounter = 0;
-  JogAcc =JogAccMax;
+  // cyclecounter = 0;
+  // JogAcc =JogAccMax;
 
 }
 
@@ -207,21 +229,21 @@ void MotorMonitor(){
     data.command = IDLE;
     moveDone = false;
   }
-}  
+} 
+
 //trajectory planning procedure
 void PlanTrajectory(float _s){ 
- Serial.println("Call plan trajectory");   
+
  N = long(_s*K/360.0) - cN ;        //difference from desired and current position [steps]
- Serial.println(_s); 
- Serial.println(K); 
+
  if (N == 0) {Nint = -1; return;}   //
     if (N < 0) dir = false;
     else dir = true;    
 
         //Compute trajectory
         N = abs(N); float s_ = N*alfa;
-        T = sqrt( pow( (vs*(1+m)/aM),2)+2*s_*(1+m)/aM )-vs*(1+m)/aM; //N = round(s/alfa);
-        ta = T/(1+m); vv = vs + aM*ta; //td = (T-ta); tv = 0;
+        T = sqrt( pow( (vs*(1+m)/aM),2)+2*s_*(1+m)/aM )-vs*(1+m)/aM;  //N = round(s/alfa);
+        ta = T/(1+m); vv = vs + aM*ta;                                //td = (T-ta); tv = 0;
 
         if (vv <= vM){//TRIANGULAR PROFILE
               Na = int(N/(1+m)); Nd = N - Na; Nv = 0;
@@ -233,7 +255,7 @@ void PlanTrajectory(float _s){
               tv = (s_-sad)/vv, T = Tad+tv ;
               Nad = int(sad/alfa); Na = int(Nad/(m+1)); Nd = Nad - Na; Nv = N - Nad; //Nv - number of steps in the phase v=const.
             }
-    //Vsf [steps/0.1ms] - the start speed, Af[steps/(0.1ms)^2]-acceleration, Df-deceleration
+    //Vsf [steps/Ts] - the start speed, Af[steps/Ts^2]-acceleration, Df-deceleration
     Vsf = vs/alfa/F; Af = aM/alfa/F/F; Df = -Af/m;
     CurPos = 0; CurSpeed= 0; Nint=0;
 

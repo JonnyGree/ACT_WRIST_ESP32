@@ -8,12 +8,12 @@
     #define Parameters_h
 
     #include "Arduino.h"
-    //#include <stdio.h>
-    // #include "freertos/FreeRTOS.h"
-    // #include "freertos/task.h"
-    // #include "freertos/queue.h"
+    #include <stdio.h>
+    #include "freertos/FreeRTOS.h"
+    #include "freertos/task.h"
+    #include "freertos/queue.h"
     #include "esp_system.h"
-    #include "EEPROM.h"
+    //#include "EEPROM.h"
 
     //------------------ PARAMETERS -------------------------//
     #define ACTUATOR_NUMBER 6
